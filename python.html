@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tiny Python 3.6 Notebook</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#running-python">Running Python</a>
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#invoking-python">Invoking Python</a></li>
+<li><a href="#repl">REPL</a></li>
+</ul>
+</li>
+<li><a href="#the-zen-of-python">The Zen of Python</a></li>
+<li><a href="#built-in-types">Built-in Types</a>
+<ul>
+<li><a href="#variables">Variables</a></li>
+<li><a href="#numbers">Numbers</a></li>
+<li><a href="#strings">Strings</a></li>
+<li><a href="#lists">Lists</a></li>
+<li><a href="#dictionaries">Dictionaries</a></li>
+<li><a href="#tuples">Tuples</a></li>
+<li><a href="#sets">Sets</a></li>
+</ul>
+</li>
+<li><a href="#built-in-functions">Built in Functions</a></li>
+<li><a href="#unicode">Unicode</a></li>
+<li><a href="#string-formatting">String Formatting</a>
+<ul>
+<li><a href="#conversion-flags">Conversion Flags</a></li>
+<li><a href="#format-specification">Format Specification</a></li>
+<li><a href="#some-format-examples">Some format Examples</a></li>
+</ul>
+</li>
+<li><a href="#files">Files</a>
+<ul>
+<li><a href="#writing-files">Writing Files</a></li>
+<li><a href="#reading-files">Reading Files</a></li>
+</ul>
+</li>
+<li><a href="#functions">Functions</a>
+<ul>
+<li><a href="#defining-functions">Defining functions</a></li>
+<li><a href="#calling-functions">Calling Functions</a></li>
+<li><a href="#getting-help">Getting Help</a></li>
+</ul>
+</li>
+<li><a href="#classes">Classes</a>
+<ul>
+<li><a href="#subclasses">Subclasses</a></li>
+<li><a href="#class-methods-and-static-methods">Class Methods and Static Methods</a></li>
+<li><a href="#properties">Properties</a></li>
+</ul>
+</li>
+<li><a href="#looping">Looping</a>
+<ul>
+<li><a href="#while-loops">while Loops</a></li>
+<li><a href="#iteration-protocol">Iteration Protocol</a></li>
+</ul>
+</li>
+<li><a href="#conditionals">Conditionals</a>
+<ul>
+<li><a href="#truthiness">Truthiness</a></li>
+<li><a href="#short-circuiting">Short Circuiting</a></li>
+<li><a href="#ternary-operator">Ternary Operator</a></li>
+</ul>
+</li>
+<li><a href="#exceptions">Exceptions</a>
+<ul>
+<li><a href="#raising-exceptions">Raising Exceptions</a></li>
+</ul>
+</li>
+<li><a href="#decorators">Decorators</a>
+<ul>
+<li><a href="#parameterized-decorators">Parameterized Decorators</a></li>
+</ul>
+</li>
+<li><a href="#class-decorators-and-metaclasses">Class Decorators and Metaclasses</a>
+<ul>
+<li><a href="#class-decorators">Class Decorators</a></li>
+<li><a href="#creating-classes-with-type">Creating Classes with type</a></li>
+<li><a href="#metaclasses-with-functions">Metaclasses with Functions</a></li>
+<li><a href="#metaclasses-with-classes">Metaclasses with Classes</a></li>
+</ul>
+</li>
+<li><a href="#generators">Generators</a></li>
+<li><a href="#coroutines">Coroutines</a>
+<ul>
+<li><a href="#asynchronous-generators">Asynchronous Generators</a></li>
+</ul>
+</li>
+<li><a href="#comprehensions">Comprehensions</a>
+<ul>
+<li><a href="#set-comprehensions">Set Comprehensions</a></li>
+<li><a href="#dict-comprehensions">Dict Comprehensions</a></li>
+<li><a href="#generator-expressions">Generator Expressions</a></li>
+<li><a href="#asynchronous-comprehensions">Asynchronous Comprehensions</a></li>
+</ul>
+</li>
+<li><a href="#context-managers">Context Managers</a>
+<ul>
+<li><a href="#function-based-context-managers">Function Based Context Managers</a></li>
+<li><a href="#class-based-context-managers">Class Based Context Managers</a></li>
+<li><a href="#context-objects">Context objects</a></li>
+</ul>
+</li>
+<li><a href="#type-annotations">Type Annotations</a>
+<ul>
+<li><a href="#the-typing-module">The typing Module</a></li>
+<li><a href="#type-checking">Type Checking</a></li>
+</ul>
+</li>
+<li><a href="#scripts-packages-and-modules">Scripts, Packages, and Modules</a>
+<ul>
+<li><a href="#scripts">Scripts</a></li>
+<li><a href="#modules">Modules</a></li>
+<li><a href="#packages">Packages</a></li>
+<li><a href="#importing">Importing</a></li>
+</ul>
+</li>
+<li><a href="#environments">Environments</a>
+<ul>
+<li><a href="#installing-packages">Installing Packages</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="introduction">Introduction</h1>
+<p>This is not so much an instructional manual, but rather notes, tables, and examples for Python syntax. It was created by the author as an additional resource during training, meant to be distributed as a physical notebook. Participants (who favor the physical characteristics of dead tree material) could add their own notes, thoughts, and have a valuable reference of curated examples.</p>
+<h1 id="running-python">Running Python</h1>
+<h2 id="installation">Installation</h2>
+<p>To check if Python is installed, run the following from a terminal:</p>
+<pre><code>$ python3 --version
+</code></pre>
+<p>Otherwise, install Python 3 from the website <sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup>.</p>
+<h2 id="invoking-python">Invoking Python</h2>
+<p>The Python executable will behave differently depending on the command line options you give it:</p>
+<ul>
+<li>
+<p>Start the Python REPL:</p>
+<pre><code>$ python3
+</code></pre>
+</li>
+<li>
+<p>Execute the <code>file.py</code> file:</p>
+<pre><code>$ python3 file.py
+</code></pre>
+</li>
+<li>
+<p>Execute the <code>file.py</code> file, and drop into REPL with namespace of <code>file.py</code>:</p>
+<pre><code>$ python3 -i file.py
+</code></pre>
+</li>
+<li>
+<p>Execute the <code>json/tool.py</code> module:</p>
+<pre><code>$ python3 -m json.tool
+</code></pre>
+</li>
+<li>
+<p>Execute <code>"print('hi')"</code> :</p>
+<pre><code>$ python3 -c "print('hi')"
+</code></pre>
+</li>
+</ul>
+<h2 id="repl">REPL</h2>
+<ul>
+<li>Use the <code>help</code> function to read the documentation for a module/class/function. As a standalone invocation, you enter the help system and can explore various topics.</li>
+<li>Use the <code>dir</code> function to list contents of the namespace, or attributes of an object if you pass one in.</li>
+</ul>
+<blockquote>
+<p><strong>note</strong></p>
+<p>The majority of code in this book is written as if it were executed in a REPL. If you are typing it in, ignore the primary and secondary prompts (<code>&gt;&gt;&gt;</code> and <code>...</code>).</p>
+</blockquote>
+<h1 id="the-zen-of-python">The Zen of Python</h1>
+<p>Run the following in an interpreter to get an Easter egg that describes some of the ethos behind Python. This is also codified in PEP 20:</p>
+<pre><code>&gt;&gt;&gt; import this
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the
+rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation
+to guess.
+There should be one --and preferably only one--
+obvious way to do it.
+Although that way may not be obvious at first
+unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a
+bad idea.
+If the implementation is easy to explain, it may
+be a good idea.
+Namespaces are one honking great idea -- let's
+do more of those!
+</code></pre>
+<p>These might just seem like silly one liners, but there is a lot of wisdom packed in here. It is good for Python programmers to review these every once in a while and see if these hold true for their code. (Or to justify their code reviews)</p>
+<h1 id="built-in-types">Built-in Types</h1>
+<h2 id="variables">Variables</h2>
+<p>Python variables are like cattle tags, they point to objects (which can be classes, instances, modules, or functions), but variables are not the objects. You can reuse variable names for different object types (though you probably shouldn’t):</p>
+<pre><code>&gt;&gt;&gt; a = 400     # a points to an integer
+&gt;&gt;&gt; a = '400'   # a now points to a string
+</code></pre>
+<blockquote>
+<p><strong>note</strong></p>
+<p>The <code>#</code> character denotes the start of a comment. There are no multi-line comments, though most editors with Python support can comment out a region.</p>
+</blockquote>
+<p>The figure that follows illustrates how everything is an object in Python and variables just point to them.</p>
+<p><img src="https://github.com/rkennesson/Tiny-Python-3.6-Notebook/blob/master/img/py/rebind.png?raw=true" alt="Illustration of reusing the same variable"></p>
+<h2 id="numbers">Numbers</h2>
+<p>Python includes three types of numeric literals: <em>integers</em>, <em>floats</em>, and <em>complex numbers</em>. Python 3.6 adds the ability to use underscores to improve readability (PEP 515).</p>
+<p>There are many built-in functions for manipulating numbers ie. <code>abs</code>, <code>min</code>, <code>max</code>, <code>ceil</code>. Also see the <code>math</code>, <code>random</code>, and <code>statistics</code> modules in the standard library.</p>
+<h2 id="strings">Strings</h2>
+<p>Python 3 strings hold unicode data. Python has a few ways to represent strings. There is also a bytes type (PEP 3137):</p>
+<h2 id="lists">Lists</h2>
+<p>Lists are ordered mutable sequences:</p>
+<pre><code>&gt;&gt;&gt; people = ['Paul', 'John', 'George']
+&gt;&gt;&gt; people.append('Ringo')
+</code></pre>
+<p>The <code>in</code> operator is useful for checking membership on sequences:</p>
+<pre><code>&gt;&gt;&gt; 'Yoko' in people
+False
+</code></pre>
+<p>If we need the index number during iteration, the <code>enumerate</code> function gives us a tuple of index, item pairs:</p>
+<pre><code>&gt;&gt;&gt; for i, name in enumerate(people, 1):
+...     print('{} - {}'.format(i, name))
+1 - Paul
+2 - John
+3 - George
+4 - Ringo
+</code></pre>
+<p>We can do index operations on most sequences:</p>
+<pre><code>&gt;&gt;&gt; people[0]
+'Paul'
+&gt;&gt;&gt; people[-1]  # len(people) - 1
+'Ringo'
+</code></pre>
+<p>We can also do <em>slicing</em> operations on most sequences:</p>
+<pre><code>&gt;&gt;&gt; people[1:2]
+['John']
+&gt;&gt;&gt; people[:1]   # Implicit start at 0
+['Paul']
+&gt;&gt;&gt; people[1:]   # Implicit end at len(people)
+['John', 'George', 'Ringo']
+&gt;&gt;&gt; people[::2]  # Take every other item
+['Paul', 'George']
+&gt;&gt;&gt; people[::-1] # Reverse sequence
+['Ringo', 'George', 'John', 'Paul']
+</code></pre>
+<h2 id="dictionaries">Dictionaries</h2>
+<p>Dictionaries are mutable mappings of keys to values. Keys must be hashable, but values can be any object:</p>
+<pre><code>&gt;&gt;&gt; instruments = {'Paul': 'Bass',
+...                'John': 'Guitar'}
+
+&gt;&gt;&gt; instruments['George'] = 'Guitar'
+&gt;&gt;&gt; 'Ringo' in instruments
+False
+
+&gt;&gt;&gt; for name in instruments:
+...     print('{} - {}'.format(name,
+...           instruments[name]))
+Paul - Bass
+John - Guitar
+George - Guitar
+</code></pre>
+<h2 id="tuples">Tuples</h2>
+<p>Tuples are immutable sequences. Typically they are used to store <em>record</em> type data:</p>
+<pre><code>&gt;&gt;&gt; member = ('Paul', 'Bass', 1942)
+&gt;&gt;&gt; member2 = ('Ringo', 'Drums', 1940)
+</code></pre>
+<p>Note that parentheses aren’t usually required:</p>
+<pre><code>&gt;&gt;&gt; row = 1, 'Fred'     # 2 item tuple
+&gt;&gt;&gt; row2 = (2, 'Bob')   # 2 item tuple
+&gt;&gt;&gt; row3 = ('Bill')     # String!
+&gt;&gt;&gt; row4 = ('Bill',)    # 1 item tuple
+&gt;&gt;&gt; row5 = 'Bill',      # 1 item tuple
+&gt;&gt;&gt; row6 = ()           # Empty tuple
+</code></pre>
+<p>Named tuples can be used in place of normal tuples and allow context (or names) to be added to positional members. The syntax for creating them is a little different because we are dynamically creating a class first (hence the capitalized variable):</p>
+<pre><code>&gt;&gt;&gt; from collections import namedtuple
+&gt;&gt;&gt; Member = namedtuple('Member',
+...     'name, instrument, birth_year')
+&gt;&gt;&gt; member3 = Member('George', 'Guitar', 1943)
+</code></pre>
+<p>We can access members by position or name (name allows us to be more explicit):</p>
+<pre><code>&gt;&gt;&gt; member3[0]
+'George'
+
+&gt;&gt;&gt; member3.name
+'George'
+</code></pre>
+<h2 id="sets">Sets</h2>
+<p>A set is a mutable unordered collection that cannot contain duplicates. Sets are used to remove duplicates and test for membership:</p>
+<pre><code>&gt;&gt;&gt; digits = [0, 1, 1, 2, 3, 4, 5, 6,
+...     7, 8, 9]
+&gt;&gt;&gt; digit_set = set(digits)   # remove extra 1
+
+&gt;&gt;&gt; 9 in digit_set
+True
+</code></pre>
+<p>Sets are useful because they provide <em>set operations</em>, such as union (<code>|</code>), intersection (<code>&amp;</code>), difference (<code>-</code>), and xor (<code>^</code>):</p>
+<pre><code>&gt;&gt;&gt; odd = {1, 3, 5, 7, 9}
+&gt;&gt;&gt; prime = set([2, 3, 5, 7])
+&gt;&gt;&gt; even = digit_set - odd
+&gt;&gt;&gt; even
+{0, 2, 4, 6, 8}
+
+&gt;&gt;&gt; prime &amp; even  # in intersection
+{2}
+
+&gt;&gt;&gt; odd | even    # in both
+{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+&gt;&gt;&gt; even ^ prime  # not in both
+{0, 3, 4, 5, 6, 7, 8}
+</code></pre>
+<blockquote>
+<p><strong>note</strong></p>
+<p>There is no literal syntax for an empty set. You need to use:</p>
+<pre><code>&gt;&gt;&gt; empty = set()
+</code></pre>
+</blockquote>
+<h1 id="built-in-functions">Built in Functions</h1>
+<p>In the default namespace you have access to various callables:</p>
+<h1 id="unicode">Unicode</h1>
+<p>Python 3 represents strings as Unicode. We can <em>encode</em> strings to a series of bytes such as UTF-8. If we have bytes, we can <em>decode</em> them to a Unicode string:</p>
+<pre><code>&gt;&gt;&gt; x_sq = 'x²'
+&gt;&gt;&gt; x_sq.encode('utf-8')
+b'x\xc2\xb2'
+
+&gt;&gt;&gt; utf8_bytes = b'x\xc2\xb2'
+&gt;&gt;&gt; utf8_bytes.decode('utf-8')
+'x²'
+</code></pre>
+<p>If you have the unicode glyph, you can use that directly. Alternatively, you can enter a code point using <code>\u</code> followed by the 16-bit hex value xxxx. For larger code points, use <code>\U</code> followed by xxxxxxxx. If you have the Unicode name (obtained by consulting tables at <a href="http://unicode.org">unicode.org</a>), you can use the <code>\N</code> syntax. The following are equivalent:</p>
+<pre><code>&gt;&gt;&gt; result = 'x²'
+&gt;&gt;&gt; result = 'x\u00b2'
+&gt;&gt;&gt; result = 'x\N{SUPERSCRIPT TWO}'
+</code></pre>
+<p><img src="https://github.com/rkennesson/Tiny-Python-3.6-Notebook/blob/master/img/py/uniencode.png?raw=true" alt="Image illustrating *encoding* a Unicode string to a byte representation. In this case, we convert to UTF-8. There are other byte encodings for this string. If we have a UTF-8 byte string, we can *decode* it into a Unicode string. Note that we should be explicit about the decoding as there are potentially other encodings that we could decode to that might give the user erroneous data, or *mojibake*."></p>
+<h1 id="string-formatting">String Formatting</h1>
+<p>Most modern Python code uses the <code>.format</code> method (PEP 3101) to create strings from other parts. The format method uses <code>{}</code> as a placeholder.</p>
+<p>Inside of the placeholder we can provide different specifiers:</p>
+<ul>
+<li><code>{0}</code> - reference first positional argument</li>
+<li><code>{}</code> - reference implicit positional argument</li>
+<li><code>{result}</code> - reference keyword argument</li>
+<li><code>{bike.tire}</code> - reference attribute of argument</li>
+<li><code>{names[0]}</code> - reference first element of argument</li>
+</ul>
+<!-- -->
+<pre><code>&gt;&gt;&gt; person = {'name': 'Paul',
+...     'instrument': 'Bass'}
+&gt;&gt;&gt; inst = person['instrument']
+
+
+&gt;&gt;&gt; print("Name: {} plays: {}".format(
+...     person['name'], inst))
+Name: Paul plays: Bass
+</code></pre>
+<p>or:</p>
+<pre><code>&gt;&gt;&gt; print("Name: {name} "
+...       "plays: {inst}".format(
+...       name=person['name'], inst=inst))
+Name: Paul plays: Bass
+</code></pre>
+<p>You can also use <em>f-strings</em> in Python 3.6 (see PEP 498):</p>
+<pre><code>&gt;&gt;&gt; print(f'Name: {person["name"]} plays: {inst}')
+Name: Paul plays: Bass
+</code></pre>
+<p>F-strings inspect variables that are available and allow you to inline methods, or attributes from those variables.</p>
+<h2 id="conversion-flags">Conversion Flags</h2>
+<p>You can provide a <em>conversion flag</em> inside the placeholder.</p>
+<ul>
+<li><code>!s</code> - Call <code>str()</code> on argument</li>
+<li><code>!r</code> - Call <code>repr()</code> on argument</li>
+<li><code>!a</code> - Call <code>ascii()</code> on argument</li>
+</ul>
+<!-- -->
+<pre><code>&gt;&gt;&gt; class Cat:
+...     def __init__(self, name):
+...         self.name = name
+...     def __format__(self, data):
+...         return "Format"
+...     def __str__(self):
+...         return "Str"
+...     def __repr__(self):
+...         return "Repr"
+
+&gt;&gt;&gt; cat = Cat("Fred")
+&gt;&gt;&gt; print("{} {!s} {!a} {!r}".format(cat, cat, cat,
+...       cat))
+Format Str Repr Repr
+</code></pre>
+<h2 id="format-specification">Format Specification</h2>
+<p>You can provide a format specification following a colon. The grammar for format specification is as follows:</p>
+<pre><code>[[fill]align][sign][#][0][width][grouping_option]
+[.precision][type]
+</code></pre>
+<p>The following table lists the field meanings.</p>
+<p>Field              Meaning</p>
+<hr>
+<p>fill               Fills in space with <code>align</code><br>
+align              <code>&lt;</code>-left align,<br>
+<code>&gt;</code>-right align,<br>
+<code>^</code>-center align,<br>
+<code>=</code>-put padding after sign<br>
+sign               <code>+</code>-for all number,<br>
+<code>-</code>-only negative,<br>
+<em>space</em>-leading space for<br>
+positive, sign on negative<br>
+#                 Prefix integers. <code>Ob</code>-binary,<br>
+<code>0o</code>-octal, <code>0x</code>-hex<br>
+0                  Enable zero padding<br>
+width              Minimum field width<br>
+grouping_option   <code>,</code>-Use comma for thousands<br>
+separator, <code>_</code>-Use underscore<br>
+for thousands separator<br>
+.precision         Digits after period (floats).<br>
+Max string length (non-numerics)<br>
+type               <code>s</code>-string format (default)<br>
+see Integer and Float charts</p>
+<p>The tables below lists the various options we have for formatting integer and floating point numbers.</p>
+<p>Integer Types   Meaning</p>
+<hr>
+<p><code>b</code>             binary<br>
+<code>c</code>             character - convert to unicode<br>
+character<br>
+<code>d</code>             decimal (default)<br>
+<code>n</code>             decimal with locale specific<br>
+separators<br>
+<code>o</code>             octal<br>
+<code>x</code>             hex (lower-case)<br>
+<code>X</code>             hex (upper-case)</p>
+<p>Float Types   Meaning</p>
+<hr>
+<p><code>e</code>/<code>E</code>       Exponent. Lower/upper-case e<br>
+<code>f</code>           Fixed point<br>
+<code>g</code>/<code>G</code>       General. Fixed with exponent for<br>
+large,<br>
+and small numbers (<code>g</code> default)<br>
+<code>n</code>           <code>g</code> with locale specific<br>
+separators<br>
+<code>%</code>           Percentage (multiplies by 100)</p>
+<h2 id="some-format-examples">Some <code>format</code> Examples</h2>
+<p>Here are a few examples of using <code>.format</code>. Let’s format a string in the center of 12 characters surrounded by <code>*</code>. <code>*</code> is the <em>fill</em> character, <code>^</code> is the <em>align</em> field, and <code>12</code> is the <em>width</em> field:</p>
+<pre><code>&gt;&gt;&gt; "Name: {:*^12}".format("Ringo")
+'Name: ***Ringo****'
+</code></pre>
+<p>Next, we format a percentage using a width of 10, one decimal place and the sign before the width padding. <code>=</code> is the <em>align</em> field, <code>10.1</code> are the <em>width</em> and <em>precision</em> fields, and <code>%</code> is the <em>float type</em>, which converts the number to a percentage:</p>
+<pre><code>&gt;&gt;&gt; "Percent: {:=10.1%}".format(-44/100)
+'Percent: -    44.0%'
+</code></pre>
+<p>Below is a binary and a hex conversion. The <em>integer type</em> field is set to <code>b</code> and <code>x</code> respectively:</p>
+<pre><code>&gt;&gt;&gt; "Binary: {:#b}".format(12)
+'Binary: 0b1100'
+
+&gt;&gt;&gt; "Hex: {:#x}".format(12)
+'Hex: 0xc'
+</code></pre>
+<h1 id="files">Files</h1>
+<p>The <code>open</code> function will take a file path and mode as input and return a file handle. There are various modes to open a file, depending on the content and your needs. If you open the file in binary mode, you will get bytes out. In text mode you will get strings back:</p>
+<h2 id="writing-files">Writing Files</h2>
+<p>We use a context manager with a file to ensure that the file is closed when the context block exits.</p>
+<pre><code>&gt;&gt;&gt; with open('/tmp/names.txt', 'w') as fout:
+...     fout.write('Paul\r\nJohn\n')
+...     fout.writelines(['Ringo\n', 'George\n'])
+</code></pre>
+<h2 id="reading-files">Reading Files</h2>
+<p>With an opened text file, you can iterate over the lines. This saves memory as the lines are read in as needed:</p>
+<pre><code>&gt;&gt;&gt; with open('/tmp/names.txt') as fin:
+...     for line in fin:
+...         print(repr(line))
+'Paul\n'
+'John\n'
+'Ringo\n'
+'George\n'
+</code></pre>
+<h1 id="functions">Functions</h1>
+<h2 id="defining-functions">Defining functions</h2>
+<p>Functions may take input, do some processing, and return output. You can provide a docstring directly following the name and parameters of the function:</p>
+<pre><code>&gt;&gt;&gt; def add_numbers(x, y):
+...     """ add_numbers sums up x and y
+... 
+...     Arguments:
+...     x -- object that supports addition
+...     y -- object that supports addition
+...     """
+...     return x + y
+</code></pre>
+<blockquote>
+<p><strong>note</strong></p>
+<p>We use whitespace to specify a block in Python. We typically indent following a colon. PEP 8 recommends using 4 spaces. Don’t mix tabs and spaces.</p>
+</blockquote>
+<p>We can create anonymous functions using the <code>lambda</code> statement. Because they only allow an expression following the colon, it is somewhat crippled in functionality. They are commonly used as a <code>key</code> argument to <code>sorted</code>, <code>min</code>, or <code>max</code>:</p>
+<pre><code>&gt;&gt;&gt; add = lambda x, y: x + y
+&gt;&gt;&gt; add(4, 5)
+9
+</code></pre>
+<p>Functions can have <em>default</em> arguments. Be careful with mutable types here, as the default is bound to the function when the function is created, not when it is called:</p>
+<pre><code>&gt;&gt;&gt; def add_n(x, n=42):
+...     return x + n
+
+&gt;&gt;&gt; add_n(10)
+52
+&gt;&gt;&gt; add_n(3, -10)
+-7
+</code></pre>
+<p>Functions can support variable positional arguments:</p>
+<pre><code>&gt;&gt;&gt; def add_many(*args):
+...     result = 0
+...     for arg in args:
+...          result += arg
+...     return result
+
+&gt;&gt;&gt; add_many()
+0
+&gt;&gt;&gt; add_many(1)
+1
+&gt;&gt;&gt; add_many(42, 3.14)
+45.14
+</code></pre>
+<p>Functions can support variable keyword arguments:</p>
+<pre><code>&gt;&gt;&gt; def add_kwargs(**kwargs):
+...     result = 0
+...     for key in kwargs:
+...         result += kwargs[key]
+...     return result
+
+&gt;&gt;&gt; add_kwargs(x=1, y=2, z=3)
+6
+
+&gt;&gt;&gt; add_kwargs()
+0
+
+&gt;&gt;&gt; add_kwargs(4)
+Traceback (most recent call last):
+  ...
+TypeError: add_kwargs() takes 0 positional arguments
+but 1 was given
+</code></pre>
+<p>You can indicate the end of positional parameters by using a single <code>*</code>. This gives you <em>keyword only</em> parameters (PEP 3102):</p>
+<pre><code>&gt;&gt;&gt; def add_points(*, x1=0, y1=0, x2=0, y2=0):
+...     return x1 + x2, y1 + y2
+
+&gt;&gt;&gt; add_points(x1=1, y1=1, x2=3, y2=4)
+(4, 5)
+
+&gt;&gt;&gt; add_points(1, 1, 3, 4)
+Traceback (most recent call last):
+  ... 
+TypeError: add_points() takes 0 positional arguments
+but 4 were given
+</code></pre>
+<h2 id="calling-functions">Calling Functions</h2>
+<p>You can also use <code>*</code> and <code>**</code> to <em>unpack</em> sequence and dictionary arguments:</p>
+<pre><code>&gt;&gt;&gt; def add_all(*args, **kwargs):
+...     """Add all arguments"""
+...     result = 0
+...     for num in args + tuple(kwargs.values()):
+...         result += num
+...     return result
+
+&gt;&gt;&gt; sizes = (2, 4.5)
+&gt;&gt;&gt; named_sizes = {"this": 3, "that": 1}
+</code></pre>
+<p>The following two examples are the equivalent:</p>
+<pre><code>&gt;&gt;&gt; add_all(*sizes)
+6.5
+
+&gt;&gt;&gt; add_all(sizes[0], sizes[1])
+6.5
+</code></pre>
+<p>\Needspace{5\baselineskip}<br>
+The following two examples are the equivalent:</p>
+<pre><code>&gt;&gt;&gt; add_all(**named_sizes)
+4
+
+&gt;&gt;&gt; add_all(this=3, that=1)
+4
+</code></pre>
+<p>You can also combine <code>*</code> and <code>**</code> on invocation:</p>
+<pre><code>&gt;&gt;&gt; add_all(*sizes, **named_sizes)
+10.5
+</code></pre>
+<h2 id="getting-help">Getting Help</h2>
+<p>You can get help on a function that has a docstring by using <code>help</code>:</p>
+<pre><code>&gt;&gt;&gt; help(add_all)
+Help on function add_all in module __main__:
+
+add_all(*args, **kwargs)
+    Add all arguments
+</code></pre>
+<h1 id="classes">Classes</h1>
+<p>Python supports object oriented programming but doesn’t require you to create classes. You can use the built-in data structures to great effect. Here’s a class for a simple bike. The class attribute, <code>num_passengers</code>, is shared for all instances of <code>Bike</code>. The instance attributes, <code>size</code> and <code>ratio</code>, are unique to each instance:</p>
+<pre><code>&gt;&gt;&gt; class Bike:
+...     ''' Represents a bike '''
+...     num_passengers = 1   # class attribute
+...     
+...     def __init__(self, wheel_size,
+...                  gear_ratio):
+...         ''' Create a bike specifying the
+...         wheel size, and gear ratio '''
+...         # instance attributes
+...         self.size = wheel_size   
+...         self.ratio = gear_ratio
+...
+...     def gear_inches(self):
+...         return self.ratio * self.size
+</code></pre>
+<p>We can call the constructor (<code>__init__</code>), by invoking the class name. Note that <code>self</code> is the instance, but Python passes that around for us automatically:</p>
+<pre><code>&gt;&gt;&gt; bike = Bike(26, 34/13)
+&gt;&gt;&gt; print(bike.gear_inches())
+68.0
+</code></pre>
+<p>We can access both class attributes and instance attributes on the instance:</p>
+<pre><code>&gt;&gt;&gt; bike.num_passengers
+1
+
+&gt;&gt;&gt; bike.size
+26
+</code></pre>
+<p>If an attribute is not found on the instance, Python will then look for it on the class, it will look through the parent classes to continue to try and find it. If the lookup is unsuccessful, an <code>AttributeError</code> is raised.</p>
+<h2 id="subclasses">Subclasses</h2>
+<p>To subclass a class, simply place the parent class name in parentheses following the class name in the declaration. We can call the <code>super</code> function to gain access to parent methods:</p>
+<pre><code>&gt;&gt;&gt; class Tandem(Bike):
+...     num_passengers = 2
+...
+...     def __init__(self, wheel_size, rings, cogs):
+...         self.rings = rings
+...         self.cogs = cogs
+...         ratio = rings[0] / cogs[0]
+...         super().__init__(wheel_size, ratio)
+...
+...     def shift(self, ring_idx, cog_idx):
+...         self.ratio = self.rings[ring_idx] \
+...              / self.cogs[cog_idx]
+...
+</code></pre>
+<blockquote>
+<p><strong>note</strong></p>
+<p>In the above example, we used a <code>\</code> to indicate that the line continued on the following line. This is usually required unless there is an implicit line continuation with an opening brace that hasn’t been closed (<code>(</code>, <code>[</code>, or <code>{</code>).</p>
+</blockquote>
+<p>The instance of the subclass can call methods that are defined on its class or the parent class:</p>
+<pre><code>&gt;&gt;&gt; tan = Tandem(26, [42, 36], [24, 20, 15, 11])
+&gt;&gt;&gt; tan.shift(1, -1)
+&gt;&gt;&gt; tan.gear_inches()
+85.0909090909091
+</code></pre>
+<h2 id="class-methods-and-static-methods">Class Methods and Static Methods</h2>
+<p>The <code>classmethod</code> decorator is used to create methods that you can invoke directly on the class. This allows us to create alternate constructors. Note that the implicit first argument is the class, commonly named <code>cls</code> (as <code>class</code> is a keyword and will error out):</p>
+<pre><code>&gt;&gt;&gt; INCHES_PER_METER = 39.37
+
+&gt;&gt;&gt; class MountainBike(Bike):
+...     @classmethod
+...     def from_metric(cls, size_meters, ratio):
+...          return cls(size_meters *
+...                     INCHES_PER_METER,
+...                     ratio)
+
+
+&gt;&gt;&gt; mtn = MountainBike.from_metric(.559, 38/11)
+&gt;&gt;&gt; mtn.gear_inches()
+76.0270490909091
+</code></pre>
+<blockquote>
+<p><strong>note</strong></p>
+<p>In the above example, we had an implicit line continuation without a backslash, because there was a <code>(</code> on the line.</p>
+</blockquote>
+<p>The <code>staticmethod</code> decorator lets you attach functions to a class. (I don’t like them, just use a function). Note that they don’t get an implicit first argument. It can be called on the instance or the class:</p>
+<pre><code>&gt;&gt;&gt; class Recumbent(Bike):
+...     @staticmethod
+...     def is_fast():
+...         return True
+
+&gt;&gt;&gt; Recumbent.is_fast()
+True
+
+&gt;&gt;&gt; lawnchair = Recumbent(20, 4)
+&gt;&gt;&gt; lawnchair.is_fast()
+True
+</code></pre>
+<h2 id="properties">Properties</h2>
+<p>If you want to have actions occur under the covers on attribute access, you can use properties to do that:</p>
+<pre><code>&gt;&gt;&gt; class Person:
+...     def __init__(self, name):
+...         self._name = name
+...
+...     @property
+...     def name(self):
+...         if self._name == 'Richard':
+...             return 'Ringo'
+...         return self._name
+...
+...     @name.setter
+...     def name(self, value):
+...         self._name = value
+...
+...     @name.deleter
+...     def name(self):
+...         del self._name
+</code></pre>
+<p>Rather than calling the <code>.name()</code> method, we access the attribute:</p>
+<pre><code>&gt;&gt;&gt; p = Person('Richard')
+&gt;&gt;&gt; p.name
+'Ringo'
+
+&gt;&gt;&gt; p.name = 'Fred'
+</code></pre>
+<h1 id="looping">Looping</h1>
+<p>You can loop over objects in a sequence:</p>
+<pre><code>&gt;&gt;&gt; names = ['John', 'Paul', 'Ringo']
+&gt;&gt;&gt; for name in names:
+...    print(name)
+John
+Paul
+Ringo
+</code></pre>
+<p>The <code>break</code> statement will pop you out of a loop:</p>
+<pre><code>&gt;&gt;&gt; for name in names:
+...    if name == 'Paul':
+...        break
+...    print(name)
+John
+</code></pre>
+<p>The <code>continue</code> statement skips over the body of the loop and <em>continues</em> at the next item of iteration:</p>
+<pre><code>&gt;&gt;&gt; for name in names:
+...    if name == 'Paul':
+...        continue
+...    print(name)
+John
+Ringo
+</code></pre>
+<p>You can use the <code>else</code> statement to indicate that every item was looped over, and a <code>break</code> was never encountered:</p>
+<pre><code>&gt;&gt;&gt; for name in names:
+...     if name == 'George':
+...          break
+... else:
+...     raise ValueError("No Georges")
+Traceback (most recent call last):
+  ...
+ValueError: No Georges
+</code></pre>
+<p>Don’t loop over index values (<code>range(len(names))</code>). Use <code>enumerate</code>:</p>
+<pre><code>&gt;&gt;&gt; for i, name in enumerate(names, 1):
+...     print("{}. {}".format(i, name))
+1. John
+2. Paul
+3. Ringo
+</code></pre>
+<h2 id="while-loops"><code>while</code> Loops</h2>
+<p>You can use <code>while</code> loops to create loops as well. If it is an infinite loop, you can break out of it:</p>
+<pre><code>&gt;&gt;&gt; done = False
+&gt;&gt;&gt; while not done:
+...     # some work
+...     done = True
+</code></pre>
+<h2 id="iteration-protocol">Iteration Protocol</h2>
+<p>To make an iterator implement <code>__iter__</code> and <code>__next__</code>:</p>
+<pre><code>&gt;&gt;&gt; class fib:
+...     def __init__(self, limit=None):
+...         self.val1 = 1
+...         self.val2 = 1
+...         self.limit = limit
+...
+...     def __iter__(self):
+...         return self
+...
+...     def __next__(self):
+...         val = self.val1 
+...         self.val1 = self.val2
+...         self.val2 = val + self.val1
+...         if self.limit is not None and \
+...             val &lt; self.limit:
+...             return val
+...         raise StopIteration
+</code></pre>
+<p>Use the iterator in a loop:</p>
+<pre><code>&gt;&gt;&gt; e = fib(6)
+&gt;&gt;&gt; for val in e:
+...    print(val)
+1
+1
+2
+3
+5
+</code></pre>
+<p>Unrolling the protocol:</p>
+<pre><code>&gt;&gt;&gt; e = fib(6)
+&gt;&gt;&gt; it = iter(e)  # calls e.__iter__()
+&gt;&gt;&gt; next(it)      # calls it.__next__()
+1
+&gt;&gt;&gt; next(it)
+1
+&gt;&gt;&gt; next(it)
+2
+&gt;&gt;&gt; next(it)
+3
+&gt;&gt;&gt; next(it)
+5
+&gt;&gt;&gt; next(it)
+Traceback (most recent call last):
+  ...
+StopIteration
+</code></pre>
+<h1 id="conditionals">Conditionals</h1>
+<p>Python has an <code>if</code> statement with zero or more <code>elif</code> statements, and an optional <code>else</code> statement at the end. In Python, the word <code>elif</code> is Dutch for <em>else if</em>:</p>
+<pre><code>&gt;&gt;&gt; grade = 72
+
+&gt;&gt;&gt; def letter_grade(grade):
+...     if grade &gt; 90:
+...         return 'A'
+...     elif grade &gt; 80:
+...         return 'B'
+...     elif grade &gt; 70:
+...         return 'C'
+...     else:
+...         return 'D'
+
+&gt;&gt;&gt; letter_grade(grade)
+'C'
+</code></pre>
+<p>Python supports the following tests: <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>==</code>, and <code>!=</code>. For boolean operators use <code>and</code>, <code>or</code>, and <code>not</code> (<code>&amp;</code>, <code>|</code>, and <code>^</code> are the bitwise operators).</p>
+<p>Note that Python also supports <em>range comparisons</em>:</p>
+<pre><code>&gt;&gt;&gt; x = 4
+&gt;&gt;&gt; if 3 &lt; x &lt; 5:
+...     print("Four!")
+Four!
+</code></pre>
+<p>Python does not have a switch statement, often dictionaries are used to support a similar construct:</p>
+<pre><code>&gt;&gt;&gt; def add(x, y):
+...     return x + y
+
+&gt;&gt;&gt; def sub(x, y):
+...     return x - y
+
+&gt;&gt;&gt; ops = {'+': add, '-': sub}
+
+&gt;&gt;&gt; op = '+'
+&gt;&gt;&gt; a = 2
+&gt;&gt;&gt; b = 3
+&gt;&gt;&gt; ops[op](a, b)
+5
+</code></pre>
+<h2 id="truthiness">Truthiness</h2>
+<p>You can define the <code>__bool__</code> method to teach your classes how to act in a boolean context. If that doesn’t exists, Python will use <code>__len__</code>, and finally default to <code>True</code>.</p>
+<p>The following table lists <em>truthy</em> and <em>falsey</em> values:</p>
+<p>Truthy               Falsey</p>
+<hr>
+<p><code>True</code>               <code>False</code><br>
+Most objects         <code>None</code><br>
+<code>1</code>                  <code>0</code><br>
+<code>3.2</code>                <code>0.0</code><br>
+<code>[1, 2]</code>             <code>[]</code> (empty list)<br>
+<code>{'a': 1, 'b': 2}</code>   <code>{}</code> (empty dict)<br>
+<code>'string'</code>           <code>""</code> (empty string)<br>
+<code>'False'</code><br>
+<code>'0'</code></p>
+<h2 id="short-circuiting">Short Circuiting</h2>
+<p>The <code>and</code> statement will short circuit if it evaluates to false:</p>
+<pre><code>&gt;&gt;&gt; 0 and 1/0
+0
+</code></pre>
+<p>Likewise, the <code>or</code> statement will short circuit when something evaluates to true:</p>
+<pre><code>&gt;&gt;&gt; 1 or 1/0
+1
+</code></pre>
+<h2 id="ternary-operator">Ternary Operator</h2>
+<p>Python has its own ternary operator, called a <em>conditional expression</em> (see PEP 308). These are handy as they can be used in comprehension constructs and <code>lambda</code> functions:</p>
+<pre><code>&gt;&gt;&gt; last = 'Lennon' if band == 'Beatles' else 'Jones'
+</code></pre>
+<p>Note that this has similar behavior to an <code>if</code> statement, but it is an expression, and not a statement. Python distinguishes these two. An easy way to determine between the two, is to remember that an expression follows a <code>return</code> statement. Anything you can <code>return</code> is an expression.</p>
+<h1 id="exceptions">Exceptions</h1>
+<p>Python can catch one or more exceptions (PEP 3110). You can provide a chain of different exceptions to catch if you want to react differently. A few hints:</p>
+<ul>
+<li>Try to keep the block of the <code>try</code> statement down to the code that throws exceptions</li>
+<li>Be specific about the exceptions that you catch</li>
+<li>If you want to inspect the exception, use <code>as</code> to create a variable to point to it</li>
+</ul>
+<p>If you use a bare <code>raise</code> inside of an <code>except</code> block, Python’s traceback will point back to the location of the original exception, rather than where it is raised from.</p>
+<pre><code>&gt;&gt;&gt; def avg(seq):
+...     try:
+...         result = sum(seq) / len(seq)
+...     except ZeroDivisionError as e:
+...         return None
+...     except Exception:
+...         raise
+...     return result
+
+
+&gt;&gt;&gt; avg([1, 2, 4]) 
+2.3333333333333335
+
+&gt;&gt;&gt; avg([]) is None
+True
+
+&gt;&gt;&gt; avg('matt')
+Traceback (most recent call last):
+  ...
+TypeError: unsupported operand type(s) for +: 'int'
+and 'str'
+</code></pre>
+<h2 id="raising-exceptions">Raising Exceptions</h2>
+<p>You can raise an exception using the <code>raise</code> statement (PEP 3109):</p>
+<pre><code>&gt;&gt;&gt; def bad_code(x):
+...     raise ValueError('Bad code')
+
+&gt;&gt;&gt; bad_code(1)
+Traceback (most recent call last):
+  ...
+ValueError: Bad code
+</code></pre>
+<h1 id="decorators">Decorators</h1>
+<p>A decorator (PEP 318) allows us to insert logic before and after a function is called. You can define a decorator with a function that takes a function as input and returns a function as output. Here is the identity decorator:</p>
+<pre><code>&gt;&gt;&gt; def identity(func):
+...     return func
+</code></pre>
+<p>We can decorate a function with it like this:</p>
+<pre><code>&gt;&gt;&gt; @identity
+... def add(x, y):
+...     return x + y
+</code></pre>
+<p>A more useful decorator can inject logic before and after calling the original function. To do this we create a function inside of the function and return that:</p>
+<pre><code>&gt;&gt;&gt; import functools
+&gt;&gt;&gt; def verbose(func):
+...     @functools.wraps(func)
+...     def inner(*args, **kwargs):
+...         print("Calling with:{} {}".format(args,
+...               kwargs))
+...         res = func(*args, **kwargs)
+...         print("Result:{}".format(res))
+...         return res
+...     return inner
+</code></pre>
+<p>Above, we use print functions to illustrate before/after behavior, otherwise this is very similar to identity decorator.</p>
+<p>There is a special syntax for applying the decorator. We put <code>@</code> before the decorator name and place that on a line directly above the function we wish to decorate. Using the <code>@verbose</code> line before a function declaration is syntactic sugar for re-assigning the variable pointing to the function to the result of calling the decorator with the function passed into it:</p>
+<pre><code>&gt;&gt;&gt; @verbose
+... def sub(x, y):
+...     return x - y
+</code></pre>
+<p>This could also be written as, <code>sub = verbose(sub)</code>. Note that our decorated function will still call our original function, but add in some <code>print</code> statements:</p>
+<pre><code>&gt;&gt;&gt; sub(5, 4)
+Calling with:(5, 4) {}
+Result:1
+1
+</code></pre>
+<h2 id="parameterized-decorators">Parameterized Decorators</h2>
+<p>Because we can use closures to create functions, we can use closures to create decorators as well. This is very similar to our decorator above, but now we make a function that will return a decorator. Based on the inputs to that function, we can control (or parameterize) the behavior of the decorator:</p>
+<pre><code>&gt;&gt;&gt; def verbose_level(level):
+...     def verbose(func):
+...         @functools.wraps(func)
+...         def inner(*args, **kwargs):
+...             for i in range(level):  # parameterized!
+...                 print("Calling with:{} {}".format(
+...                       args, kwargs))
+...             res = func(*args, **kwargs)
+...             print("Result:{}".format(res))
+...             return res
+...         return inner
+...     return verbose
+</code></pre>
+<p>When you decorate with parameterized decorators, the decoration looks differently, because we need to invoke the function to create a decorator:</p>
+<pre><code>&gt;&gt;&gt; @verbose_level(2)
+... def div(x, y):
+...     return x/y
+
+&gt;&gt;&gt; div(1, 5)
+Calling with:(1, 5) {}
+Calling with:(1, 5) {}
+Result:0.2
+0.2
+</code></pre>
+<h1 id="class-decorators-and-metaclasses">Class Decorators and Metaclasses</h1>
+<p>Python allows you to dynamically create and modify classes. Class decorators and metaclasses are two ways to do this.</p>
+<h2 id="class-decorators">Class Decorators</h2>
+<p>You can decorate a class definition with a <em>class decorator</em> (PEP 3129). It is a function that takes a class as input and returns a class.</p>
+<pre><code>&gt;&gt;&gt; def add_chirp(cls):
+...     'Class decorator to add speak method'
+...     def chirp(self):
+...         return "CHIRP"
+...     cls.speak = chirp
+...     return cls
+... 
+&gt;&gt;&gt; @add_chirp
+... class Bird:
+...     pass
+
+&gt;&gt;&gt; b = Bird()
+&gt;&gt;&gt; print(b.speak())
+CHIRP
+</code></pre>
+<h2 id="creating-classes-with-type">Creating Classes with <code>type</code></h2>
+<p>You can use <code>type</code> to determine the type of an object, but you can also provide the name, parents, and attributes map, and it will return a class.</p>
+<pre><code>&gt;&gt;&gt; def howl(self):
+...     return "HOWL"
+
+&gt;&gt;&gt; parents = ()
+&gt;&gt;&gt; attrs_map = {'speak': howl}
+&gt;&gt;&gt; F = type('F', parents, attrs_map)
+
+&gt;&gt;&gt; f = F()
+&gt;&gt;&gt; print(f.speak())
+HOWL
+</code></pre>
+<h2 id="metaclasses-with-functions">Metaclasses with Functions</h2>
+<p>In the class definition you can specify a metaclass (PEP 3115), which can be a function or a class. Here is an example of a function that can alter the class.</p>
+<pre><code>&gt;&gt;&gt; def meta(name, parents, attrs_map):
+...     def bark(self):
+...         return "WOOF!"
+...     attrs_map['speak'] = bark
+...     return type(name, parents, attrs_map)
+
+&gt;&gt;&gt; class Dog(metaclass=meta):
+...     pass
+
+&gt;&gt;&gt; d = Dog()
+&gt;&gt;&gt; print(d.speak())
+WOOF!
+</code></pre>
+<h2 id="metaclasses-with-classes">Metaclasses with Classes</h2>
+<p>You can define a class decorator and use either <code>__new__</code> or <code>__init__</code>. Typically most use <code>__new__</code> as it can alter attributes like <code>__slots__</code>.</p>
+<pre><code>&gt;&gt;&gt; class CatMeta(type): # Needs to subclass type
+...     def __new__(cls, name, parents, attrs_map):
+...         # cls is CatMeta
+...         # res is the class we are creating
+...         res = super().__new__(cls, name,
+...             parents, attrs_map)
+...         def meow(self):
+...             return "MEOW"
+...         res.speak = meow
+...         return res
+... 
+...     def __init__(cls, name, parents, attrs_map):
+...         super().__init__(name, parents, attrs_map)
+
+&gt;&gt;&gt; class Cat(metaclass=CatMeta):
+...     pass
+
+&gt;&gt;&gt; c = Cat()
+&gt;&gt;&gt; print(c.speak())
+MEOW
+</code></pre>
+<h1 id="generators">Generators</h1>
+<p>Generators (PEP 255) are functions that suspend their state as you iterate over the results of them. Each <code>yield</code> statement returns the next item of iteration and then <em>freezes</em> the state of the function. When iteration is resumed, the function continues from the point it was frozen. Note, that the result of calling the function is a generator:</p>
+<pre><code>&gt;&gt;&gt; def fib_gen():
+...     val1, val2 = 1, 1
+...     while 1:
+...         yield val1
+...         val1, val2 = val2, (val1+val2)
+</code></pre>
+<p>We can simulate iteration by using the iteration protocol:</p>
+<pre><code>&gt;&gt;&gt; gen = fib_gen()
+&gt;&gt;&gt; gen_iter = iter(gen)
+&gt;&gt;&gt; next(gen_iter)
+1
+&gt;&gt;&gt; next(gen_iter)
+1
+&gt;&gt;&gt; next(gen_iter)
+2
+&gt;&gt;&gt; next(gen_iter)
+3
+</code></pre>
+<h1 id="coroutines">Coroutines</h1>
+<p>The <code>asyncio</code> library (PEP 3153) provides asynchronous I/O in Python 3. We use <code>async def</code> to define a <em>coroutine function</em> (see PEP 492). The result of calling this is a <em>coroutine object</em>. Inside a coroutine we can use <code>var = await future</code> to suspend the coroutine and wait for <code>future</code> to return. We can also await another coroutine. A coroutine object may be created but isn’t run until an event loop is running:</p>
+<pre><code>&gt;&gt;&gt; import asyncio
+&gt;&gt;&gt; async def greeting():
+...    print("Here they are!")
+
+&gt;&gt;&gt; co = greeting()
+&gt;&gt;&gt; co  # Not running
+&lt;coroutine object greeting at 0x1087dcba0&gt;
+
+&gt;&gt;&gt; loop = asyncio.get_event_loop()
+&gt;&gt;&gt; loop.run_until_complete(co)
+Here they are!
+&gt;&gt;&gt; loop.close()
+</code></pre>
+<p>To return an object, use an <code>asyncio.Future</code>:</p>
+<pre><code>&gt;&gt;&gt; async def compute(future):
+...     print("Starting...")
+...     # Simulate IO...
+...     res = await answer()
+...     future.set_result(res)
+
+
+&gt;&gt;&gt; async def answer():
+...     await asyncio.sleep(1)
+...     return 42
+
+&gt;&gt;&gt; f = asyncio.Future()
+&gt;&gt;&gt; loop = asyncio.get_event_loop()
+&gt;&gt;&gt; loop.run_until_complete(compute(f))
+&gt;&gt;&gt; loop.close()
+&gt;&gt;&gt; f.result()
+42
+</code></pre>
+<blockquote>
+<p><strong>note</strong></p>
+<p><code>await</code> and <code>async</code> are <em>soft keywords</em> in Python 3.6. You will get a warning if you use them for variable names. In Python 3.7, they will be reserved keywords.</p>
+</blockquote>
+<blockquote>
+<p><strong>note</strong></p>
+<p>For backwards compatibility in Python 3.4:</p>
+<ul>
+<li><code>await</code> can be replaced with <code>yield from</code></li>
+<li><code>async def</code> can be replaced with a function decorated with <code>@asyncio.coroutine</code></li>
+</ul>
+</blockquote>
+<h2 id="asynchronous-generators">Asynchronous Generators</h2>
+<p>Python 3.6 adds asynchronous generators (PEP 525). You can use the <code>yield</code> statement in an <code>async def</code> function:</p>
+<pre><code>&gt;&gt;&gt; async def fib():
+...     v1, v2 = 1, 1
+...     while True:
+...          # similate io
+...          await asyncio.sleep(1)
+...          yield v1
+...          v1, v2 = v2, v1+v2
+...          if v1 &gt; 5:
+...              break
+
+&gt;&gt;&gt; async def get_results():
+...    async for num in fib():
+...        print(num)
+
+&gt;&gt;&gt; loop = asyncio.get_event_loop()  
+&gt;&gt;&gt; loop.run_until_complete(get_results())
+1  # sleeps for 1 sec before each print
+1
+2
+3
+5
+&gt;&gt;&gt; loop.close()
+</code></pre>
+<h1 id="comprehensions">Comprehensions</h1>
+<p>Comprehension constructs allow us to combine the functional ideas behind map and filter into an easy to read, single line of code. When you see code that is aggregating into a list (or dict, set, or generator), you can replace it with a list comprehension (or dict, set comprehension, or generator expression). Here is an example of the code smell:</p>
+<pre><code>&gt;&gt;&gt; nums = range(10)
+&gt;&gt;&gt; result = []
+&gt;&gt;&gt; for num in nums:
+...     if num % 2 == 0:  # filter
+...         result.append(num*num)  # map
+</code></pre>
+<p>This can be specified with a list comprehension (PEP 202):</p>
+<pre><code>&gt;&gt;&gt; result = [num*num for num in nums
+...           if num % 2 == 0]
+</code></pre>
+<p>To construct a list comprehension:</p>
+<ul>
+<li>
+<p>Assign the result (<code>result</code>) to brackets. The brackets signal to the reader of the code that a list will be returned:</p>
+<pre><code>result = [ ]
+</code></pre>
+</li>
+<li>
+<p>Place the <em>for</em> loop construct inside the brackets. No colons are necessary:</p>
+<pre><code>result = [for num in nums]
+</code></pre>
+</li>
+<li>
+<p>Insert any operations that filter the accumulation after the for loop:</p>
+<pre><code>result = [for num in nums if num % 2 == 0]
+</code></pre>
+</li>
+<li>
+<p>Insert the accumulated object (<code>num*num</code>) at the front directly following the left bracket. Insert parentheses around the object if it is a tuple:</p>
+<pre><code>result = [num*num for num in nums
+          if num % 2 == 0]
+</code></pre>
+</li>
+</ul>
+<h2 id="set-comprehensions">Set Comprehensions</h2>
+<p>If you replace the <code>[</code> with <code>{</code>, you will get a set comprehension (PEP 274) instead of a list comprehension:</p>
+<pre><code>&gt;&gt;&gt; {num*num for num in nums if num % 2 == 0}
+{0, 64, 4, 36, 16}
+</code></pre>
+<h2 id="dict-comprehensions">Dict Comprehensions</h2>
+<p>If you replace the <code>[</code> with <code>{</code>, and separate the key and value with a colon, you will get a dictionary comprehension (PEP 274):</p>
+<pre><code>&gt;&gt;&gt; {num:num*num for num in nums if num % 2 == 0}
+{0: 0, 2: 4, 4: 16, 6: 36, 8: 64}
+</code></pre>
+<blockquote>
+<p><strong>note</strong></p>
+<p>In Python 3.6, dictionaries are now ordered by key entry. Hence the ordering above.</p>
+</blockquote>
+<h2 id="generator-expressions">Generator Expressions</h2>
+<p>If you replace the <code>[</code> with <code>(</code>, you will get a generator instead of a list. This is called a <em>generator expression</em> (PEP 289):</p>
+<pre><code>&gt;&gt;&gt; (num*num for num in nums if num % 2 == 0)
+&lt;generator object &lt;genexpr&gt; at 0x10a6f8780&gt;
+</code></pre>
+<h2 id="asynchronous-comprehensions">Asynchronous Comprehensions</h2>
+<p>Python 3.6 (PEP 530) gives us <em>asynchronous comprehensions</em>. You can add <code>async</code> following what you are collecting to make it asynchronous. If you had the following code:</p>
+<pre><code>&gt;&gt;&gt; async def process(aiter):
+...     result = []
+...     async for num in aiter:
+...         if num % 2 == 0:  # filter
+...             result.append(num*num)  # map
+</code></pre>
+<p>You could replace it with:</p>
+<pre><code>&gt;&gt;&gt; async def process(aiter):
+...     result = [num*num async for num in aiter
+...               if num % 2 == 0]
+</code></pre>
+<h1 id="context-managers">Context Managers</h1>
+<p>If you find code where you need to make sure something happens before <em>and</em> after a block, a context manager (PEP 343) is a convenient way to enforce that. Another code smell that indicates you could be using a context manager is a <code>try</code>/<code>finally</code> block.</p>
+<p>Context managers can be created with functions or classes.</p>
+<p>If we were writing a Python module to write TeX, we might do something like this to ensure that the environments are closed properly:</p>
+<pre><code>&gt;&gt;&gt; def start(env):
+...     return '\\begin{{{}}}'.format(env)
+
+&gt;&gt;&gt; def end(env):
+...      return '\\end{{{}}}'.format(env)
+
+&gt;&gt;&gt; def may_error():
+...     import random
+...     if random.random() &lt; .5:
+...         return 'content'
+...     raise ValueError('Problem')
+
+
+&gt;&gt;&gt; out = []
+&gt;&gt;&gt; out.append(start('center'))
+
+&gt;&gt;&gt; try:
+...     out.append(may_error())
+... except ValueError:
+...     pass
+... finally:
+...     out.append(end('center'))
+</code></pre>
+<p>This code can use a context manager to be a little cleaner.</p>
+<h2 id="function-based-context-managers">Function Based Context Managers</h2>
+<p>To create a context manager with a function, decorate with <code>contextlib.contextmanager</code>, and yield where you want to insert your block:</p>
+<pre><code>&gt;&gt;&gt; import contextlib
+&gt;&gt;&gt; @contextlib.contextmanager
+... def env(name, content):
+...     content.append('\\begin{{{}}}'.format(name))
+...     try:
+...         yield
+...     except ValueError:
+...         pass
+...     finally:
+...         content.append('\\end{{{}}}'.format(name))
+</code></pre>
+<p>Our code looks better now, and there will always be a closing tag:</p>
+<pre><code>&gt;&gt;&gt; out = []
+&gt;&gt;&gt; with env('center', out):
+...     out.append(may_error())
+
+&gt;&gt;&gt; out
+['\\begin{center}', 'content', '\\end{center}']
+</code></pre>
+<h2 id="class-based-context-managers">Class Based Context Managers</h2>
+<p>To create a class based context manager, implement the <code>__enter__</code> and <code>__exit__</code> methods:</p>
+<pre><code>&gt;&gt;&gt; class env:
+...     def __init__(self, name, content):
+...         self.name = name
+...         self.content = content
+...
+...     def __enter__(self):
+...         self.content.append('\\begin{{{}}}'.format(
+...             self.name))
+...
+...     def __exit__(self, type, value, tb):
+...         # if error in block, t, v, &amp; tb
+...         # have non None values
+...         # return True to hide exception
+...         self.content.append('\\end{{{}}}'.format(
+...             self.name))
+...         return True
+</code></pre>
+<p>The code looks the same as using the function based context manager:</p>
+<pre><code>&gt;&gt;&gt; out = []
+&gt;&gt;&gt; with env('center', out):
+...     out.append(may_error())
+
+&gt;&gt;&gt; out  # may_error had an issue
+['\\begin{center}', '\\end{center}']
+</code></pre>
+<h2 id="context-objects">Context objects</h2>
+<p>Some context managers create objects that we can use while inside of the context. The <code>open</code> context manager returns a file object:</p>
+<pre><code>with open('/tmp/test.txt') as fin:
+    # muck around with fin
+</code></pre>
+<p>To create an object in a function based context manager, simply <code>yield</code> the object. In a class based context manager, return the object in the <code>__enter__</code> method.</p>
+<h1 id="type-annotations">Type Annotations</h1>
+<p>Python 3.6 (PEP 483 and 484) allows you to provide types for input and output of functions. They can be used to:</p>
+<ul>
+<li>Allow 3rd party libraries such as mypy <sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup> to run static typing</li>
+<li>Assist editors with type inference</li>
+<li>Aid developers in understanding code</li>
+</ul>
+<p>Types can be expressed as:</p>
+<blockquote>
+<ul>
+<li>Built-in classes</li>
+<li>Third party classes</li>
+<li>Abstract Base Classes</li>
+<li>Types found in the <code>types</code> module</li>
+<li>User-defined classes</li>
+</ul>
+</blockquote>
+<p>A basic example:</p>
+<pre><code>&gt;&gt;&gt; def add(x: int, y: int) -&gt; float:
+...     return x + y
+
+&gt;&gt;&gt; add(2, 3)
+5
+</code></pre>
+<p>Note that Python does not do type checking, you need to use something like mypy:</p>
+<pre><code>&gt;&gt;&gt; add("foo", "bar")
+'foobar'
+</code></pre>
+<p>You can also specify the types of variables with a comment:</p>
+<pre><code>&gt;&gt;&gt; from typing import Dict
+&gt;&gt;&gt; ages = {}  # type: Dict[str, int]
+</code></pre>
+<h2 id="the-typing-module">The <code>typing</code> Module</h2>
+<p>This module allows you to provide hints for:</p>
+<ul>
+<li>Callback functions</li>
+<li>Generic containers</li>
+<li>The <code>Any</code> type</li>
+</ul>
+<p>To designate a class or function to not type check its annotations, use the <code>@typing.no_type_check</code> decorator.</p>
+<h2 id="type-checking">Type Checking</h2>
+<p>Python 3.6 provides no support for type checking. You will need to install a tool like <code>mypy</code>:</p>
+<pre><code>$ pip install mypy
+$ python3 -m mypy script.py
+</code></pre>
+<h1 id="scripts-packages-and-modules">Scripts, Packages, and Modules</h1>
+<h2 id="scripts">Scripts</h2>
+<p>A script is a Python file that you invoke <code>python</code> on. Typically there is a line near the bottom that looks like this:</p>
+<pre><code>if __name__ == '__main__':
+    # execute something
+</code></pre>
+<p>This test allows you to change the code path when you execute the code versus when you import the code. The <code>__name__</code> attribute of a module is set to <code>'__main__'</code> when you execute that module. Otherwise, if you import the module, it will be the name of the module (without <code>.py</code>).</p>
+<h2 id="modules">Modules</h2>
+<p>Modules are files that end in <code>.py</code>. According to PEP 8, we lowercase the module name and don’t put underscores between the words in them. Any module found in the <code>PYTHONPATH</code> environment variable or the <code>sys.path</code> list, can be imported.</p>
+<h2 id="packages">Packages</h2>
+<p>A directory that has a file named <code>__init__.py</code> in it is a <em>package</em>. A package can have modules in it as well as sub packages. The package should be found in <code>PYTHONPATH</code> or <code>sys.path</code> to be imported. An example might look like this:</p>
+<pre><code>packagename/
+  __init__.py
+  module1.py
+  module2.py
+  subpackage/
+    __init__.py
+</code></pre>
+<p>The <code>__init__.py</code> module can be empty or can import code from other modules in the package to remove nesting in import statements.</p>
+<h2 id="importing">Importing</h2>
+<p>You can import a package or a module:</p>
+<pre><code>import packagename
+import packagename.module1
+</code></pre>
+<p>Assume there is a <code>fib</code> function in <code>module1</code>. You have access to everything in the namespace of the module you imported. To use this function you will need to use the fully qualified name, <code>packagename.module1.fib</code>:</p>
+<pre><code>import packagename.module1
+
+packagename.module1.fib()
+</code></pre>
+<p>If you only want to import the <code>fib</code> function, use the <code>from</code> variant:</p>
+<pre><code>from packagename.module1 import fib
+
+fib()
+</code></pre>
+<p>You can also rename imports using <code>as</code>:</p>
+<pre><code>from packagename.module1 import fib as package_fib
+
+package_fib()
+</code></pre>
+<h1 id="environments">Environments</h1>
+<p>Python 3 includes the <code>venv</code> module for creating a sandbox for your project or a <em>virtual environment</em>.</p>
+<p>To create an environment on Unix systems, run:</p>
+<pre><code>$ python3 -m venv /path/to/env
+</code></pre>
+<p>On Windows, run:</p>
+<pre><code>c:\&gt;c:\Python36\python -m venv c:\path\to\env
+</code></pre>
+<p>To enter or <em>activate</em> the environment on Unix, run:</p>
+<pre><code>$ source /path/to/env/bin/activate
+</code></pre>
+<p>On Windows, run:</p>
+<pre><code>c:\&gt;c:\path\to\env\Scripts\activate.bat
+</code></pre>
+<p>Your prompt should have the name of the active virtual environment in parentheses. To <em>deactivate</em> an environment on both platforms, just run the following:</p>
+<pre><code>(env) $ deactivate
+</code></pre>
+<h2 id="installing-packages">Installing Packages</h2>
+<p>You should now have a <code>pip</code> executable, that will install a package from PyPI <sup class="footnote-ref"><a href="#fn3" id="fnref3">3</a></sup> into your virtual environment:</p>
+<pre><code>(env) $ pip install django
+</code></pre>
+<p>To uninstall a package run:</p>
+<pre><code>(env) $ pip uninstall django
+</code></pre>
+<p>If you are having issues installing a package, you might want to look into alternative Python distributions such as Anaconda <sup class="footnote-ref"><a href="#fn4" id="fnref4">4</a></sup> that have prepackaged many harder to install packages.</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p><a href="http://python.org">http://python.org</a> <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p><a href="http://mypy-lang.org/">http://mypy-lang.org/</a> <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p><a href="https://pypi.python.org/pypi">https://pypi.python.org/pypi</a> <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p><a href="https://docs.continuum.io/anaconda/">https://docs.continuum.io/anaconda/</a> <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+    </div>
+  </div>
+</body>
+
+</html>
