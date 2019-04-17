@@ -111,7 +111,6 @@ Numbers
 
 Python includes three types of numeric literals: *integers*, *floats*, and *complex numbers*. Python 3.6 adds the ability to use underscores to improve readability (PEP 515).
 
-\Needspace{5\baselineskip}
 There are many built-in functions for manipulating numbers ie. `abs`, `min`, `max`, `ceil`. Also see the `math`, `random`, and `statistics` modules in the standard library.
 
 Strings
@@ -552,7 +551,6 @@ The following two examples are the equivalent:
     >>> add_all(sizes[0], sizes[1])
     6.5
 
-\Needspace{5\baselineskip}
 The following two examples are the equivalent:
 
     >>> add_all(**named_sizes)
