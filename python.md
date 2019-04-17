@@ -106,8 +106,6 @@ The figure that follows illustrates how everything is an object in Python and va
 
 ![Illustration of reusing the same variable](img/py/rebind.png)
 
-%\Needspace{5\baselineskip}
-\clearpage
 Numbers
 -------
 
@@ -121,8 +119,6 @@ Strings
 
 Python 3 strings hold unicode data. Python has a few ways to represent strings. There is also a bytes type (PEP 3137):
 
-\Needspace{10\baselineskip}
-\Needspace{5\baselineskip}
 Lists
 -----
 
@@ -165,7 +161,6 @@ We can also do *slicing* operations on most sequences:
     >>> people[::-1] # Reverse sequence
     ['Ringo', 'George', 'John', 'Paul']
 
-\Needspace{5\baselineskip}
 Dictionaries
 ------------
 
@@ -246,15 +241,12 @@ Sets are useful because they provide *set operations*, such as union (`|`), inte
     >>> even ^ prime  # not in both
     {0, 3, 4, 5, 6, 7, 8}
 
-\Needspace{10\baselineskip}
 > **note**
 >
 > There is no literal syntax for an empty set. You need to use:
 >
 >     >>> empty = set()
 
-%\Needspace{5\baselineskip}
-\clearpage
 Built in Functions
 ==================
 
@@ -392,7 +384,6 @@ The tables below lists the various options we have for formatting integer and fl
   `x`             hex (lower-case)
   `X`             hex (upper-case)
 
-\Needspace{5\baselineskip}
   Float Types   Meaning
   ------------- ----------------------------------
   `e`/`E`       Exponent. Lower/upper-case e
@@ -1010,8 +1001,6 @@ Parameterized Decorators
 
 Because we can use closures to create functions, we can use closures to create decorators as well. This is very similar to our decorator above, but now we make a function that will return a decorator. Based on the inputs to that function, we can control (or parameterize) the behavior of the decorator:
 
-%\Needspace{5\baselineskip}
-\clearpage
     >>> def verbose_level(level):
     ...     def verbose(func):
     ...         @functools.wraps(func)
@@ -1164,7 +1153,6 @@ The `asyncio` library (PEP 3153) provides asynchronous I/O in Python 3. We use `
     Here they are!
     >>> loop.close()
 
-\clearpage
 To return an object, use an `asyncio.Future`:
 
     >>> async def compute(future):
